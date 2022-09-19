@@ -2,15 +2,12 @@ import turtle
 
 
 def up_turtle():
-    global turlte_dir
-
     turtle.setheading(90)
     turtle.forward(50)
     turtle.stamp()
 
 
 def down_turtle():
-    global turlte_dir
     turtle.setheading(270)
     turtle.forward(50)
     turtle.stamp()
