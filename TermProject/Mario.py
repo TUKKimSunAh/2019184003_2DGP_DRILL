@@ -45,7 +45,7 @@ def Scroll():
 open_canvas(WIN_WIDTH, WIN_HEIGHT)
 
 #이미지 삽입
-Map_Stage1 = load_image('Map_Stage1.png')
+Map_Stage1 = load_image('logo.png')
 Mario = load_image('Mario.png')
 
 
