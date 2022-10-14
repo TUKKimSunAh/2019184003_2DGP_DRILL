@@ -15,7 +15,7 @@ class Mario:
 
     def __init__(self):
         self.x, self.y = 0, 90
-        self.Speed = 10
+        self.Speed = 20
         self.frame = 0
 
         self.Idle_R = load_image('Mario_R.png')
@@ -26,14 +26,16 @@ class Mario:
         self.Jump_L = load_image('Mario_JumpL.png')
 
     def update(self):
-        pass
+        if Check_Move == 1 or Check_Move == -1:
+            self.frame = (self.frame + 1) % 3
+
 
     def draw(self):
         if Check_Dir == 1:
             if Check_Move == 0:
                 self.Idle_R.draw(self.x, self.y)
             elif Check_Move == 1:
-                self.Idle_R.clip_draw(self.frame * 32, 0, 32, 32, self.x, self.y)
+                self.Walk_R.clip_draw(self.frame * 32, 0, 32, 32, self.x, self.y)
             elif Check_Move == -1:
                 self.Jump_R.draw(self.x, self.y)
 
@@ -63,6 +65,8 @@ def handle_events():
             Check_Dir = -1
             Check_Move = 1
             mario.x = mario.x - mario.Speed
+
+
 
 
 mario = None
