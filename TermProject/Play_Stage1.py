@@ -7,8 +7,8 @@ class Mario:
     global Check_Dir, Check_Move
 
     def __init__(self):
-        self.x, self.y = 0, 90
-        self.Speed = 1
+        self.x, self.y = 0, 102
+        self.Speed = 0.5
         self.frame = 0
 
         self.Idle_R = load_image('Mario_R.png')
@@ -56,6 +56,17 @@ class Stage1:
     def draw(self):
         self.Stage_1.draw(self.x//2, self.y // 2)
 
+class Long_Block:
+    def __init__(self):
+        self.x, self.y = 722, 85
+        self.Long_Block = load_image('Long_Block.png')
+
+    def update(self):
+        pass
+
+    def draw(self):
+        self.Long_Block.draw(self.x/2, self.y/2)
+
 
 def handle_events():
     global Check_Dir, Check_Move
@@ -96,14 +107,16 @@ Check_Move = 0
 bJump = False
 #마리오에게 적용되는 중력값
 Force = 0
+
 open_canvas()
 
 
 def enter():
-    global mario, running, stage1
+    global mario, running, stage1, long_block
 
     mario = Mario()
     stage1 = Stage1()
+    long_block = Long_Block()
     # grass = Grass()
     running = True
 
@@ -118,12 +131,14 @@ def exit():
 def update():
     mario.update()
     stage1.update()
+    long_block.update()
 
 
 def draw():
     clear_canvas()
     stage1.draw()
     mario.draw()
+    long_block.draw()
     update_canvas()
 
 
