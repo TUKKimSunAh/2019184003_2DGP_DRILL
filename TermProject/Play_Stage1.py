@@ -8,11 +8,12 @@ class Mario:
     global Check_Dir, Check_Move, bJump, Check_Jump
 
     def __init__(self):
-        self.x, self.y = 20, 800
+        self.x, self.y = 20, 300
         self.width, self.height = 32, 32
         self.Speed = 0.5
         self.frame = 0
-        self.Force = 1
+        self.Force = 0
+        self.Gravity = 0.1
 
         self.Idle_R = load_image('Mario_R.png')
         self.Idle_L = load_image('Mario_L.png')
@@ -22,9 +23,7 @@ class Mario:
         self.Jump_L = load_image('Mario_JumpL.png')
 
     def update(self):
-
-        # 마리오에게 중력 구현
-        self.y -= self.Force
+        self.Set_Gravity()
 
         if Check_Move == 1:
             self.frame = (self.frame + 1) % 3
@@ -35,7 +34,7 @@ class Mario:
             self.x = self.x - self.Speed
 
         elif bJump:
-            self.y = self.y + self.Force * 2
+            self.y += 3
 
     def draw(self):
         if Check_Dir == 1:
@@ -56,6 +55,10 @@ class Mario:
             elif Check_Jump == -1:
                 self.Jump_L.draw(self.x, self.y)
 
+    def Set_Gravity(self):
+        self.y += self.Force
+        self.Force -= self.Gravity
+
     def get_bb(self):
         return self.x - 16, self.y-16, self.x + 16, self.y + 16
 
@@ -67,6 +70,7 @@ class Stage1:
         self.Stage_1 = load_image('Map_Stage1.png')
 
     def update(self):
+
         pass
 
     def draw(self):
@@ -76,11 +80,11 @@ class Stage1:
 class Long_Block:
     def __init__(self):
         self.width, self.height = 357, 90
-        self.x, self.y = 345 / 2, 87 / 2
+        self.x, self.y = 357 / 2, 90 / 2
         self.Long_Block = load_image('Long_Block.png')
 
     def get_bb(self):
-        return self.x - 345 / 2, self.y - 87 / 2, self.x + 345 / 2, self.y + 87 / 2
+        return self.x - 357 / 2, self.y - 90 / 2, self.x + 357 / 2, self.y + 90 / 2
 
     def update(self):
         pass
@@ -253,10 +257,14 @@ def exit():
 
 
 def update():
+    mario.Force += 0.01
     Offset()
     mario.update()
     stage1.update()
     long_block.update()
+
+    if collide(mario, long_block):
+        mario.Force = 0
 
 
 def draw():
@@ -266,9 +274,6 @@ def draw():
     mario.draw()
     long_block.draw()
     update_canvas()
-
-    if collide(mario, long_block):
-        mario.Force = 0
 
 
 def Offset():

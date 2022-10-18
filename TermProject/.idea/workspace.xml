@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="410164e9-30fa-4e68-ac3a-ea378bb019a9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Long_Block.png" beforeDir="false" afterPath="$PROJECT_DIR$/Long_Block.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mario.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mario.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/My_Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/My_Game.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Play_Stage1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Play_Stage1.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -180,9 +177,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.My_Game" />
+        <item itemvalue="Python.Play_Stage1" />
         <item itemvalue="Python.Logo_State" />
         <item itemvalue="Python.Title_State" />
-        <item itemvalue="Python.Play_Stage1" />
         <item itemvalue="Python.Game_Framework" />
       </list>
     </recent_temporary>
