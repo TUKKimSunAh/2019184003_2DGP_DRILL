@@ -35,11 +35,11 @@ def Scroll():
     global Player_Speed
 
     if (offsetX + 200) < Player_x:
-        scrollX -= Player_Speed
+        scrollX -= Player_Speed*2
         offsetX += Player_Speed
 
     if (offsetX + 200) > Player_x:
-        scrollX +=Player_Speed
+        scrollX += Player_Speed*2
         offsetX -= Player_Speed
 
 open_canvas(WIN_WIDTH, WIN_HEIGHT)

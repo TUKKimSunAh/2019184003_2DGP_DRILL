@@ -1,6 +1,7 @@
 from pico2d import *
 import Game_Framework
 import Logo_State
+import ScrollMgr
 
 
 class Mario:
@@ -8,6 +9,7 @@ class Mario:
 
     def __init__(self):
         self.x, self.y = 20, 800
+        self.width, self.height = 32, 32
         self.Speed = 0.5
         self.frame = 0
         self.Force = 1
@@ -21,6 +23,7 @@ class Mario:
 
     def update(self):
 
+        # 마리오에게 중력 구현
         self.y -= self.Force
 
         if Check_Move == 1:
@@ -53,35 +56,37 @@ class Mario:
             elif Check_Jump == -1:
                 self.Jump_L.draw(self.x, self.y)
 
-        # elif bJump:
-        #     if Check_Dir == -1:
-        #         self.Jump_L.draw(self.x, self.y)
-        #     elif Check_Dir == 1:
-        #         self.Jump_R.draw(self.x, self.y)
+    def get_bb(self):
+        return self.x - 16, self.y-16, self.x + 16, self.y + 16
 
 
 class Stage1:
     def __init__(self):
-        self.x, self.y = 4000, 600
+        self.width, self.height = 4000, 600
+        self.x, self.y = 2000, 300
         self.Stage_1 = load_image('Map_Stage1.png')
 
     def update(self):
         pass
 
     def draw(self):
-        self.Stage_1.draw(self.x // 2, self.y // 2)
+        self.Stage_1.draw(self.x - 200 + inScroll, self.y)
 
 
 class Long_Block:
     def __init__(self):
-        self.x, self.y = 722, 85
+        self.width, self.height = 357, 90
+        self.x, self.y = 345 / 2, 87 / 2
         self.Long_Block = load_image('Long_Block.png')
+
+    def get_bb(self):
+        return self.x - 345 / 2, self.y - 87 / 2, self.x + 345 / 2, self.y + 87 / 2
 
     def update(self):
         pass
 
     def draw(self):
-        self.Long_Block.draw(self.x / 2, self.y / 2)
+        self.Long_Block.draw(self.x, self.y)
 
 
 class Bricks:
@@ -156,6 +161,7 @@ class QBox_Die:
         self.QBox_Die.draw(self.x / 2, self.y / 2)
 
 
+
 def handle_events():
     global Check_Dir, Check_Move, bJump, Check_Jump
     global mario
@@ -192,11 +198,24 @@ def handle_events():
 
         elif event.type == SDL_KEYUP and event.key == SDLK_UP:
             bJump = False
-            Check_Jump =0
+            Check_Jump = 0
 
+def collide(a,b):
+    left_a, bottom_a, right_a, top_a = a.get_bb()
+    left_b, bottom_b, right_b, top_b = b.get_bb()
 
+    if left_a > right_b:
+        return False
+    if right_a < left_b:
+        return False
+    if top_a < bottom_b:
+        return False
+    if bottom_a > top_b:
+        return False
+    return True
 
 mario = None
+long_block = None
 stage1 = None
 running = None
 
@@ -206,6 +225,9 @@ Check_Dir = 1
 Check_Move = 0
 # 마리오의 점푸를 확인하기 위한 변수 | 아이들일 경우 0, 오른쪽 점프할 경우 1, 왼쪽 점프할 경우 -1
 Check_Jump = 1
+
+offset = 800 >> 1
+inScroll = 0
 
 # 마리오 점프 여부 | True, False로 판단
 bJump = False
@@ -231,17 +253,36 @@ def exit():
 
 
 def update():
+    Offset()
     mario.update()
     stage1.update()
     long_block.update()
 
 
 def draw():
+
     clear_canvas()
     stage1.draw()
     mario.draw()
     long_block.draw()
     update_canvas()
+
+    if collide(mario, long_block):
+        mario.Force = 0
+
+
+def Offset():
+    global offset, inScroll
+
+    inScroll = ScrollMgr.Get_Scroll()
+
+    if offset + 200 < mario.x:
+        ScrollMgr.Set_Scroll(-mario.Speed)
+        offset += mario.Speed
+
+    if offset - 200 > mario.x:
+        ScrollMgr.Set_Scroll(mario.Speed)
+        offset -= mario.Speed
 
 
 open_canvas()
