@@ -5,6 +5,7 @@ import title_state
 import item_state
 import add_del_state
 
+
 class Grass:
     def __init__(self):
         self.image = load_image('grass.png')
@@ -15,7 +16,7 @@ class Grass:
 
 class Boy:
     def __init__(self):
-        self.x, self.y = random.randint(100,700),90
+        self.x, self.y = random.randint(100, 700), 90
         self.frame = random.randint(0, 7)
         self.dir = 1
         self.image = load_image('animation_sheet.png')
@@ -37,7 +38,7 @@ class Boy:
         elif self.dir == -1:
             self.image.clip_draw(self.frame * 100, 0, 100, 100, self.x, self.y)
         if self.item == 'Ball':
-            self.ball_image.draw(self.x+10, self.y+50)
+            self.ball_image.draw(self.x + 10, self.y + 50)
         if self.item == 'BigBall':
             self.big_ball_image.draw(self.x + 10, self.y + 50)
 
@@ -63,26 +64,32 @@ boy = None
 grass = None
 running = None
 
+
+def initTeam(count):
+    global team
+    team = [Boy() for i in range(count)]
+
+
 def enter():
-    global boy, grass, running
+    global grass, running
     global team
 
-    team = [Boy() for i in range(0, Boy_Num)]
+    team = [Boy() for i in range(1)]
     grass = Grass()
     running = True
 
+
 def exit():
     global boy, grass, team
-    for boy in team:
-        del boy
+    del team
     del grass
+
 
 def update():
     global boy, team, Boy_Num
-    team = [Boy() for i in range(0, Boy_Num)]
-    Boy_Num = add_del_state.boy_plus
     for boy in team:
         boy.update()
+
 
 def draw():
     clear_canvas()
@@ -100,7 +107,6 @@ def draw_world():
 def pause():
     pass
 
+
 def resume():
     pass
-
-
