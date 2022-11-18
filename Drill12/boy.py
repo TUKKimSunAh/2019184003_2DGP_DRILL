@@ -124,6 +124,7 @@ class Boy:
 
     def update(self):
         self.cur_state.do(self)
+        
 
         if self.event_que:
             event = self.event_que.pop()

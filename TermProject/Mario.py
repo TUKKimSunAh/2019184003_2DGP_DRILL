@@ -1,4 +1,5 @@
 from pico2d import *
+import Game_World
 
 # Stage1 맵 크기
 Stage1_WIDTH, Stage1_HEIGHT = 4000, 600
@@ -6,70 +7,99 @@ Stage1_WIDTH, Stage1_HEIGHT = 4000, 600
 # 게임 플레이 화면
 WIN_WIDTH, WIN_HEIGHT = 800, 600
 
-
-#키보드나 마우스 관련 이벤트들 관리 함수
-def Handle_Events():
-    global Game_Wait
-    global Game_Play
-    global Program_Run
-    global Player_x, Player_y
-    global Player_Speed
-
-    events = get_events()
-
-    for event in events:
-        if event.type == SDL_QUIT:
-            Program_Run = False
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            Program_Run = False
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_RIGHT:
-            Player_x = Player_x + Player_Speed
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_LEFT:
-            Player_x = Player_x - Player_Speed
+# 마리오의 방향을 확인하기 위한 변수 | 오른쪽일 경우 1, 왼쪽일 경우 -1
+Check_Dir = 1
+# 마리오의 행동을 확인하기 위한 변수 | 아이들일 경우 0, 오른쪽일 경우 1, 왼쪽일 경우 -1
+Check_Move = 0
+# 마리오의 점푸를 확인하기 위한 변수 | 아이들일 경우 0, 오른쪽 점프할 경우 1, 왼쪽 점프할 경우 -1
+Check_Jump = 1
+# 마리오 점프 여부 | True, False로 판단
+bJump = False
 
 
-def Scroll():
-    global offsetX
-    global scrollX
-    global Player_x, Player_y
-    global Player_Speed
+class Mario:
+    global Check_Dir, Check_Move, bJump, Check_Jump
 
-    if (offsetX + 200) < Player_x:
-        scrollX -= Player_Speed*2
-        offsetX += Player_Speed
+    def __init__(self):
+        self.x, self.y = 20, 300
+        self.width, self.height = 32, 32
+        self.Speed = 0.5
+        self.frame = 0
+        self.Force = 0
+        self.Gravity = 0.1
 
-    if (offsetX + 200) > Player_x:
-        scrollX += Player_Speed*2
-        offsetX -= Player_Speed
+        self.Idle_R = load_image('Mario_R.png')
+        self.Idle_L = load_image('Mario_L.png')
+        self.Walk_R = load_image('Mario_WalkR.png')
+        self.Walk_L = load_image('Mario_WalkL.png')
+        self.Jump_R = load_image('Mario_JumpR.png')
+        self.Jump_L = load_image('Mario_JumpL.png')
 
-open_canvas(WIN_WIDTH, WIN_HEIGHT)
+    def update(self):
+        self.Set_Gravity()
+        self.Force += 0.01
 
-#이미지 삽입
-Map_Stage1 = load_image('logo.png')
-Mario = load_image('Mario.png')
+        if Check_Move == 1:
+            self.frame = (self.frame + 1) % 3
+            self.x = self.x + self.Speed
 
+        elif Check_Move == -1:
+            self.frame = (self.frame + 1) % 3
+            self.x = self.x - self.Speed
 
-#전역변수들 초기값 설정
-Program_Run = True
-Game_Wait = False
-Game_Play = False
+        elif bJump:
+            self.y += 3
 
-offsetX = WIN_WIDTH//2
-scrollX = 0
-Player_Speed = 10
-Player_x = 10
-Player_y = 100
+    def draw(self):
+        if Check_Dir == 1:
+            if Check_Move == 0:
+                self.Idle_R.draw(self.x, self.y)
+            elif Check_Move == 1:
+                self.Walk_R.clip_draw(self.frame * 32, 0, 32, 32, self.x, self.y)
 
+        elif Check_Dir == -1:
+            if Check_Move == 0:
+                self.Idle_L.draw(self.x, self.y)
+            elif Check_Move == -1:
+                self.Walk_L.clip_draw(self.frame * 32, 0, 32, 32, self.x, self.y)
 
-while Program_Run:
-    clear_canvas()
-    Map_Stage1.draw(10 + scrollX, Stage1_HEIGHT // 2)
-    Mario.draw(Player_x, Player_y)
-    update_canvas()
-    Handle_Events()
+        if bJump:
+            if Check_Jump == 1:
+                self.Jump_R.draw(self.x, self.y)
+            elif Check_Jump == -1:
+                self.Jump_L.draw(self.x, self.y)
 
-close_canvas()
+    def Set_Gravity(self):
+        self.y += self.Force
+        self.Force -= self.Gravity
 
+    def get_bb(self):
+        return self.x - 16, self.y - 16, self.x + 16, self.y + 16
 
+    def handle_events(self, event):
+        global Check_Dir, Check_Move, bJump, Check_Jump
 
+        if event.type == SDL_KEYDOWN:
+            if event.key == SDLK_d:
+                Check_Dir = 1
+                Check_Move = 1
 
+            if event.key == SDLK_a:
+                Check_Dir = -1
+                Check_Move = -1
+
+            if event.key == SDLK_w:
+                if Check_Dir == 1:
+                    Check_Jump = 1
+                elif Check_Dir == -1:
+                    Check_Jump = -1
+
+                bJump = True
+
+        elif event.type == SDL_KEYUP:
+            if event.key == SDLK_a or event.key == SDLK_d:
+                Check_Move = 0
+
+            if event.key == SDLK_w:
+                bJump = False
+                Check_Jump = 0
