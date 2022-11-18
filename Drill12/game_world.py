@@ -13,6 +13,7 @@ def all_objects():
         for o in layer:
             yield o
 
+
 def clear():
     for o in all_objects():
         del o

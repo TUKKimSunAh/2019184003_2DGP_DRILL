@@ -26,7 +26,7 @@ class Mario:
         self.Speed = 0.5
         self.frame = 0
         self.Force = 0
-        self.Gravity = 0.1
+        self.Gravity = 0.09
 
         self.Idle_R = load_image('Mario_R.png')
         self.Idle_L = load_image('Mario_L.png')
@@ -36,8 +36,8 @@ class Mario:
         self.Jump_L = load_image('Mario_JumpL.png')
 
     def update(self):
-        self.Set_Gravity()
         self.Force += 0.01
+        self.Set_Gravity()
 
         if Check_Move == 1:
             self.frame = (self.frame + 1) % 3
@@ -48,7 +48,8 @@ class Mario:
             self.x = self.x - self.Speed
 
         elif bJump:
-            self.y += 3
+            self.y += 3.5
+            self.Force += 0.03
 
     def draw(self):
         if Check_Dir == 1:

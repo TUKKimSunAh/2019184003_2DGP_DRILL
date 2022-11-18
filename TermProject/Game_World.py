@@ -26,5 +26,5 @@ def Remove_Object(obj):
         if obj in layer:
             layer.remove(obj)
             del obj
-
+            return
     raise ValueError('Trying Destroy non existing object')

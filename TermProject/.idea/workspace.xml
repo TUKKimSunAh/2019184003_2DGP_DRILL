@@ -2,17 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="410164e9-30fa-4e68-ac3a-ea378bb019a9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Drill12/boy.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drill12/boy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/TermProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TermProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Drill12/game_world.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drill12/game_world.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bricks.png" beforeDir="false" afterPath="$PROJECT_DIR$/Bricks.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Iron.png" beforeDir="false" afterPath="$PROJECT_DIR$/Iron.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2DGP 게임 기획.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game_World.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_World.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mario.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mario.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/My_Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/My_Game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Originals/Long_Block.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pipe1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pipe1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pipe2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pipe2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pipe3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pipe3.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Play_Stage1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Play_Stage1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QBox1.png" beforeDir="false" afterPath="$PROJECT_DIR$/QBox1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QBox2.png" beforeDir="false" afterPath="$PROJECT_DIR$/QBox2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QBox3.png" beforeDir="false" afterPath="$PROJECT_DIR$/QBox3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QBox_Die.png" beforeDir="false" afterPath="$PROJECT_DIR$/QBox_Die.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QBox1.py" beforeDir="false" afterPath="$PROJECT_DIR$/QBox1.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,14 +41,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/blaql/Documents/GitHub/2019184003_2DGP_DRILL/TermProject&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/blaql/Documents/GitHub/2019184003_2DGP_DRILL/Drill12"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\blaql\Documents\GitHub\2019184003_2DGP_DRILL\TermProject" />
